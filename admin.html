@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Neural Sentinel | Operations Dashboard</title>
+  <meta
+    name="description"
+    content="Admin dashboard for Neural Sentinel with contact submissions, scan history, publishing controls, and SQL-backed cybersecurity operations."
+  >
+  <meta name="theme-color" content="#07111f">
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <link rel="manifest" href="site.webmanifest">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="page-shell">
+    <nav class="topbar topbar-page">
+      <a class="brand" href="index.html">
+        <span class="brand-mark"></span>
+        <span>Neural Sentinel</span>
+      </a>
+      <button class="menu-toggle" aria-label="Open navigation" aria-expanded="false">
+        <span></span>
+        <span></span>
+      </button>
+      <div class="nav-links">
+        <a href="index.html">Home</a>
+        <a href="index.html#lab">Site Lab</a>
+        <a href="blog.html">Blog</a>
+        <a href="admin.html">Admin</a>
+      </div>
+    </nav>
+
+    <header class="page-hero">
+      <p class="eyebrow">Admin Operations</p>
+      <h1>Manage leads, site analysis history, and cybersecurity publishing from one control surface.</h1>
+      <p class="muted-copy">
+        This dashboard is backed by the same SQL database as the public site. Log in to manage posts
+        and review new requests.
+      </p>
+    </header>
+
+    <section id="loginView" class="auth-shell">
+      <article class="login-panel">
+        <div class="card-header">
+          <span>Admin Login</span>
+          <span>Seeded account</span>
+        </div>
+        <form id="loginForm" class="post-form compact-form">
+          <label>
+            Username
+            <input type="text" name="username" value="admin" required>
+          </label>
+          <label>
+            Password
+            <input type="password" name="password" value="SentinelGrid2026!" required>
+          </label>
+          <button class="button button-primary" type="submit">Sign In</button>
+          <p class="form-message" id="loginMessage" aria-live="polite"></p>
+        </form>
+        <p class="muted-copy">
+          Default seeded credentials are shown for local development. Change them before any real deployment.
+        </p>
+      </article>
+    </section>
+
+    <main id="adminView" class="admin-layout hidden">
+      <aside class="admin-sidebar stack-card">
+        <p class="eyebrow">Session</p>
+        <h2 id="adminName">Sentinel Admin</h2>
+        <p class="muted-copy" id="adminRole">admin</p>
+        <button class="button button-secondary" id="logoutButton" type="button">Sign Out</button>
+      </aside>
+
+      <section class="dashboard-grid">
+        <div class="overview-grid" id="overviewGrid"></div>
+
+        <article class="stack-card security-card">
+          <div class="card-header">
+            <span>Account Security</span>
+            <span>Password rotation</span>
+          </div>
+          <form id="passwordForm" class="post-form compact-form">
+            <label>
+              Current Password
+              <input type="password" name="currentPassword" autocomplete="current-password" required>
+            </label>
+            <div class="form-split">
+              <label>
+                New Password
+                <input type="password" name="newPassword" autocomplete="new-password" required>
+              </label>
+              <label>
+                Confirm Password
+                <input type="password" name="confirmPassword" autocomplete="new-password" required>
+              </label>
+            </div>
+            <p class="muted-copy">
+              Use at least 12 characters with uppercase, lowercase, number, and special character.
+            </p>
+            <div class="form-actions">
+              <button class="button button-primary" type="submit">Update Password</button>
+            </div>
+            <p class="form-message" id="passwordMessage" aria-live="polite"></p>
+          </form>
+        </article>
+
+        <article class="stack-card">
+          <div class="card-header">
+            <span>Recent Contacts</span>
+            <span>SQL Inbox</span>
+          </div>
+          <div id="contactsList" class="record-list"></div>
+        </article>
+
+        <article class="stack-card">
+          <div class="card-header">
+            <span>Recent Site Analyses</span>
+            <span>Safe mode</span>
+          </div>
+          <div id="scansList" class="record-list"></div>
+        </article>
+
+        <article class="stack-card post-editor">
+          <div class="card-header">
+            <span>Publish Briefing</span>
+            <span id="editorState">New post</span>
+          </div>
+          <form id="postForm" class="post-form">
+            <input type="hidden" name="postId">
+            <label>
+              Title
+              <input type="text" name="title" required>
+            </label>
+            <label>
+              Excerpt
+              <textarea name="excerpt" rows="3" required></textarea>
+            </label>
+            <label>
+              Content
+              <textarea name="content" rows="8" required></textarea>
+            </label>
+            <div class="form-split">
+              <label>
+                Category
+                <input type="text" name="category" value="Cybersecurity">
+              </label>
+              <label>
+                Status
+                <select name="status">
+                  <option value="draft">Draft</option>
+                  <option value="published">Published</option>
+                </select>
+              </label>
+            </div>
+            <label class="checkbox-row">
+              <input type="checkbox" name="isFeatured">
+              <span>Feature this post on the homepage</span>
+            </label>
+            <div class="form-actions">
+              <button class="button button-primary" type="submit">Save Post</button>
+              <button class="button button-secondary" id="cancelEditButton" type="button">Cancel Edit</button>
+            </div>
+            <p class="form-message" id="postMessage" aria-live="polite"></p>
+          </form>
+        </article>
+
+        <article class="stack-card">
+          <div class="card-header">
+            <span>Published and Draft Posts</span>
+            <span>Content control</span>
+          </div>
+          <div id="postsList" class="record-list"></div>
+        </article>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="footer-brand">
+        <strong class="footer-brand-title">Neural Sentinel</strong>
+        <p class="footer-description">Full-stack cyber publishing, lead intake, admin operations, and safe public website analysis.</p>
+      </div>
+      <div class="footer-sections">
+        <div class="footer-column">
+          <h4 class="footer-support-title">Support</h4>
+          <div class="footer-link-list footer-support-links"></div>
+        </div>
+        <div class="footer-column">
+          <h4 class="footer-legal-title">Legal</h4>
+          <div class="footer-link-list footer-legal-links"></div>
+        </div>
+        <div class="footer-column">
+          <h4 class="footer-connect-title">Connect</h4>
+          <div class="footer-link-list footer-connect-links"></div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span class="footer-copy"></span>
+      </div>
+    </footer>
+  </div>
+
+  <script src="config.js"></script>
+  <script src="brand.js"></script>
+  <script src="admin.js"></script>
+</body>
+</html>

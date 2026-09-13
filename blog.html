@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Neural Sentinel | Threat Briefings</title>
+  <meta
+    name="description"
+    content="Read dynamic cybersecurity briefings, cloud security insights, identity defense updates, and operational risk commentary from Neural Sentinel."
+  >
+  <meta name="theme-color" content="#07111f">
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <link rel="manifest" href="site.webmanifest">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="page-shell">
+    <nav class="topbar topbar-page">
+      <a class="brand" href="index.html">
+        <span class="brand-mark"></span>
+        <span>Neural Sentinel</span>
+      </a>
+      <button class="menu-toggle" aria-label="Open navigation" aria-expanded="false">
+        <span></span>
+        <span></span>
+      </button>
+      <div class="nav-links">
+        <a href="index.html">Home</a>
+        <a href="index.html#lab">Site Lab</a>
+        <a href="blog.html">Blog</a>
+        <a href="admin.html">Admin</a>
+      </div>
+    </nav>
+
+    <header class="page-hero">
+      <p class="eyebrow">Threat Briefings</p>
+      <h1>Cybersecurity reporting that updates from your backend, not from hardcoded cards.</h1>
+      <p class="muted-copy">
+        Search published posts, open full briefings, and use this page as the editorial layer for your
+        cybersecurity brand.
+      </p>
+    </header>
+
+    <main class="page-grid blog-layout">
+      <section class="stack-card">
+        <div class="card-header">
+          <span>Search Briefings</span>
+          <span id="blogMeta">Loading</span>
+        </div>
+        <form id="blogSearchForm" class="search-row">
+          <input type="search" name="query" placeholder="Search identity, cloud, response, vendors">
+          <button class="button button-primary" type="submit">Search</button>
+        </form>
+        <p class="form-message" id="blogMessage" aria-live="polite"></p>
+        <div id="blogList" class="post-list"></div>
+      </section>
+
+      <aside class="stack-card post-detail" id="blogDetail">
+        <p class="eyebrow">Article View</p>
+        <h2>Select a briefing from the list to read it here.</h2>
+        <p class="muted-copy">You can also open a direct article URL like `blog.html?slug=your-post-slug`.</p>
+      </aside>
+    </main>
+
+    <footer class="site-footer">
+      <div class="footer-brand">
+        <strong class="footer-brand-title">Neural Sentinel</strong>
+        <p class="footer-description">Full-stack cyber publishing, lead intake, admin operations, and safe public website analysis.</p>
+      </div>
+      <div class="footer-sections">
+        <div class="footer-column">
+          <h4 class="footer-support-title">Support</h4>
+          <div class="footer-link-list footer-support-links"></div>
+        </div>
+        <div class="footer-column">
+          <h4 class="footer-legal-title">Legal</h4>
+          <div class="footer-link-list footer-legal-links"></div>
+        </div>
+        <div class="footer-column">
+          <h4 class="footer-connect-title">Connect</h4>
+          <div class="footer-link-list footer-connect-links"></div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span class="footer-copy"></span>
+      </div>
+    </footer>
+  </div>
+
+  <script src="config.js"></script>
+  <script src="brand.js"></script>
+  <script src="blog.js"></script>
+</body>
+</html>

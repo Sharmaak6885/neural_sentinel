@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Neural Sentinel | Cybersecurity Command Center</title>
+  <meta
+    name="description"
+    content="Neural Sentinel is a full-stack cybersecurity website with live intelligence, admin tools, blog publishing, SQL-backed workflows, and safe public website analysis."
+  >
+  <meta name="theme-color" content="#07111f">
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <link rel="manifest" href="site.webmanifest">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <script src="particles.js" defer></script>
+  <script src="voice.js" defer></script>
+</head>
+<body>
+  <canvas id="particles-bg" style="position: fixed; inset: 0; z-index: -2; pointer-events: none;"></canvas>
+  <div class="site-shell">
+    <header class="hero">
+      <nav class="topbar">
+        <a class="brand" href="#home">
+          <span class="brand-mark"></span>
+          <span>Neural Sentinel</span>
+        </a>
+        <button class="menu-toggle" aria-label="Open navigation" aria-expanded="false">
+          <span></span>
+          <span></span>
+        </button>
+        <div class="nav-links">
+          <a href="#intel">Threat Intel</a>
+          <a href="#lab">Site Lab</a>
+          <a href="#services">Services</a>
+          <a href="#briefings">Briefings</a>
+          <a href="#operations">Operations</a>
+          <a href="blog.html">Blog</a>
+          <a href="admin.html">Admin</a>
+          <a href="#contact">Contact</a>
+        </div>
+      </nav>
+
+      <section class="hero-grid" id="home">
+        <div class="hero-copy">
+          <p class="eyebrow">Cyber Defense Platform</p>
+          <h1>Run a cybersecurity website that publishes, analyzes, and responds in real time.</h1>
+          <p class="hero-text">
+            Neural Sentinel combines a public-facing command site, a dynamic blog, an admin workspace,
+            SQL-backed lead and post management, and a safe public website intelligence workflow.
+          </p>
+          <div class="hero-actions">
+            <a class="button button-primary" href="#lab">Analyze a Website</a>
+            <a class="button button-secondary" href="blog.html">Read Threat Briefings</a>
+          </div>
+          <div class="hero-badges">
+            <span>24/7 SOC Monitoring</span>
+            <span>SQL-Backed Operations</span>
+            <span>Safe Website Analysis</span>
+            <span>Cloud Incident Response</span>
+          </div>
+        </div>
+
+        <div class="voice-orb-container" id="voiceOrb" title="Say 'Hello Neural, open Blog'">
+          <div class="voice-ring vr1"></div>
+          <div class="voice-ring vr2"></div>
+          <div class="voice-core"></div>
+        </div>
+
+        <div class="hero-panel">
+          <div class="hero-graphic">
+            <div class="core-rings">
+              <div class="ring r1"></div>
+              <div class="ring r2"></div>
+              <div class="ring r3"></div>
+              <div class="core"></div>
+            </div>
+          </div>
+          <div class="panel-header">
+            <span>Live Defense Matrix</span>
+            <span class="panel-status">Operational</span>
+          </div>
+          <div class="metrics" id="metrics"></div>
+          <div class="signal-card">
+            <div>
+              <p class="signal-label" id="signalLabel">Priority Advisory</p>
+              <h3 id="signalHeadline">Credential-stuffing traffic spike detected in retail sector.</h3>
+            </div>
+            <a href="#stories" id="signalLink">View response pattern</a>
+          </div>
+        </div>
+      </section>
+    </header>
+
+    <main>
+      <section class="section intel-section" id="intel">
+        <div class="section-heading">
+          <p class="eyebrow">Threat Intelligence</p>
+          <h2>Interactive threat watch with rotating sector alerts.</h2>
+        </div>
+        <div class="intel-layout">
+          <article class="world-card">
+            <div class="card-header">
+              <span>Global Watchlist</span>
+              <span id="watchTimestamp"></span>
+            </div>
+            <div class="map-grid" id="mapGrid"></div>
+            <div class="legend">
+              <span><i class="low"></i> Low</span>
+              <span><i class="medium"></i> Medium</span>
+              <span><i class="high"></i> High</span>
+              <span><i class="critical"></i> Critical</span>
+            </div>
+          </article>
+
+          <article class="feed-card">
+            <div class="card-header">
+              <span>Sector Feed</span>
+              <button class="ghost-button" id="rotateFeed" type="button">Rotate Feed</button>
+            </div>
+            <div class="feed-list" id="feedList"></div>
+          </article>
+        </div>
+      </section>
+
+      <section class="section lab-section" id="lab">
+        <div class="section-heading">
+          <p class="eyebrow">Website Intelligence Lab</p>
+          <h2>Search and inspect public websites through a controlled, passive analysis workflow.</h2>
+        </div>
+        <div class="lab-layout">
+          <form class="analysis-form" id="analysisForm">
+            <label>
+              Website URL
+              <input type="url" name="url" placeholder="https://example.com" required>
+            </label>
+            <label>
+              Search Keyword
+              <input type="text" name="keyword" placeholder="login, pricing, api, breach">
+            </label>
+            <p class="analysis-note">
+              Passive public-page analysis only. This checks public metadata, headers, forms, links,
+              and keyword visibility. It does not do exploit testing, brute force, or port scanning.
+            </p>
+            <button class="button button-primary" type="submit">Run Safe Analysis</button>
+            <p class="form-message" id="analysisMessage" aria-live="polite"></p>
+          </form>
+
+          <article class="analysis-result" id="analysisResult">
+            <div class="analysis-placeholder">
+              <p class="eyebrow">Awaiting Input</p>
+              <h3>Enter a public website to inspect headers, metadata, visible text, and search-term presence.</h3>
+              <p>
+                Results will appear here with a security posture score, findings, public-page details,
+                and keyword snippets when available.
+              </p>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section class="section services-section" id="services">
+        <div class="section-heading">
+          <p class="eyebrow">What We Secure</p>
+          <h2>Core cybersecurity services designed for modern attack surfaces.</h2>
+        </div>
+        <div class="services-grid" id="servicesGrid"></div>
+      </section>
+
+      <section class="section briefings-section" id="briefings">
+        <div class="section-heading section-heading-wide">
+          <div>
+            <p class="eyebrow">Threat Briefings</p>
+            <h2>Dynamic cybersecurity posts and news cards pulled from the backend.</h2>
+          </div>
+          <a class="button button-secondary" href="blog.html">Open Full Blog</a>
+        </div>
+        <div class="briefings-grid" id="briefingsGrid"></div>
+      </section>
+
+      <section class="section operations-section" id="operations">
+        <div class="section-heading">
+          <p class="eyebrow">Operations Center</p>
+          <h2>Dynamic controls that explain how your defense program actually runs.</h2>
+        </div>
+        <div class="operations-layout">
+          <article class="timeline-card">
+            <div class="card-header">
+              <span>Incident Response Flow</span>
+              <span>MTTR Focused</span>
+            </div>
+            <div class="timeline" id="timeline"></div>
+          </article>
+
+          <article class="score-card">
+            <div class="card-header">
+              <span>Security Maturity Snapshot</span>
+              <span id="maturityLabel">Adaptive</span>
+            </div>
+            <div class="score-ring">
+              <svg viewBox="0 0 120 120" aria-hidden="true">
+                <circle cx="60" cy="60" r="46"></circle>
+                <circle cx="60" cy="60" r="46" id="scoreStroke"></circle>
+              </svg>
+              <div>
+                <strong id="scoreValue">86</strong>
+                <span>/100</span>
+              </div>
+            </div>
+            <div class="score-bars" id="scoreBars"></div>
+          </article>
+        </div>
+      </section>
+
+      <section class="section stories-section" id="stories">
+        <div class="section-heading">
+          <p class="eyebrow">Case Files</p>
+          <h2>Proof-driven stories that make your cybersecurity value tangible.</h2>
+        </div>
+        <div class="stories-grid" id="storiesGrid"></div>
+      </section>
+
+      <section class="section contact-section" id="contact">
+        <div class="contact-copy">
+          <p class="eyebrow">Let's Secure Your Stack</p>
+          <h2>Capture leads, route inquiries, and push them straight into your SQL-backed workflow.</h2>
+          <p>
+            The contact form now stores requests in the database, which means your website is no longer
+            just visual. It is acting like a working cyber business platform.
+          </p>
+          <div class="contact-points">
+            <span>Fast incident intake</span>
+            <span>Service qualification</span>
+            <span>SQL lead storage</span>
+          </div>
+        </div>
+
+        <form class="contact-form" id="contactForm">
+          <label>
+            Full Name
+            <input type="text" name="name" placeholder="Ava Sharma" required>
+          </label>
+          <label>
+            Work Email
+            <input type="email" name="email" placeholder="ava@company.com" required>
+          </label>
+          <label>
+            Company
+            <input type="text" name="company" placeholder="Northstar Finance">
+          </label>
+          <label>
+            Security Priority
+            <select name="priority">
+              <option>Threat Monitoring</option>
+              <option>Cloud Security</option>
+              <option>Compliance Readiness</option>
+              <option>Incident Response</option>
+            </select>
+          </label>
+          <label>
+            Message
+            <textarea name="message" rows="4" placeholder="Tell us what you need to protect."></textarea>
+          </label>
+          <button class="button button-primary" type="submit">Send Request</button>
+          <p class="form-message" id="formMessage" aria-live="polite"></p>
+        </form>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="footer-brand">
+        <strong class="footer-brand-title">Neural Sentinel</strong>
+        <p class="footer-description">Full-stack cyber publishing, lead intake, admin operations, and safe public website analysis.</p>
+      </div>
+      <div class="footer-sections">
+        <div class="footer-column">
+          <h4 class="footer-support-title">Support</h4>
+          <div class="footer-link-list footer-support-links"></div>
+        </div>
+        <div class="footer-column">
+          <h4 class="footer-legal-title">Legal</h4>
+          <div class="footer-link-list footer-legal-links"></div>
+        </div>
+        <div class="footer-column">
+          <h4 class="footer-connect-title">Connect</h4>
+          <div class="footer-link-list footer-connect-links"></div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span class="footer-copy"></span>
+      </div>
+    </footer>
+  </div>
+
+  <script src="config.js"></script>
+  <script src="brand.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>

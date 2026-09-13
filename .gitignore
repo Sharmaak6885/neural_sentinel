@@ -1,0 +1,11 @@
+__pycache__/
+*.pyc
+database/sentinel_grid.db
+database/sentinel_grid.db-journal
+database/sentinel_grid.sqlite3
+database/sentinel_grid.sqlite3-journal
+database/sentinel_grid_platform.sqlite3
+database/sentinel_grid_platform.sqlite3-journal
+.env
+*.sqlite3
+*.db

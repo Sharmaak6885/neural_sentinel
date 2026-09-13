@@ -1,0 +1,17 @@
+{
+  "name": "Neural Sentinel",
+  "short_name": "Neural Sentinel",
+  "description": "Full-stack cyber publishing, lead intake, admin operations, and safe public website analysis.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#07111f",
+  "theme_color": "#07111f",
+  "icons": [
+    {
+      "src": "/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}
